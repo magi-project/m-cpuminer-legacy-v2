@@ -1,0 +1,22 @@
+The following dependencies and steps are needed for Raspbian Stretch released in November 2017.
+
+Prequisites may change with newer versions.
+
+This has been tested with Raspberry Pi Zero W.
+
+Note that it may be tough to get everything + the blockchain installed on a 4GB flash card.  It's recommended you use an 8GB or 16GB flash card.
+
+
+#expand the default swapfile size to 1GB since 100MB is not enough
+$ sudo nano /etc/dphys-swapfile
+#change CONF_SWAPSIZE=100 to CONF_SWAPSIZE=1024
+$ sudo /etc/init.d/dphys-swapfile stop
+$ sudo /etc/init.d/dphys-swapfile start
+
+sudo apt-get install automake
+sudo apt-get install libgmp-dev
+sudo apt-get install libcurl4-openssl-dev
+
+# a restart here is advised, but may not be needed
+
+./autogen.sh && ./configure CFLAGS="-O3" CXXFLAGS="-O3" && make
